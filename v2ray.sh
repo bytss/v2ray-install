@@ -1504,14 +1504,14 @@ change_v2ray_id() {
 		read -p "$(echo -e "默认 [${cyan}N$none]:")" y_n
 		if [[ -z $y_n ]]; then
 			echo
-			echo -e "$green 已取消修改用户ID...$none"
+			echo -e "$green User ID modification canceled...$none"
 			echo
 			break
 		else
 			if [[ $y_n == [Yy] ]]; then
 				echo
 				echo
-				echo -e "$yellow 修改用户ID = $cyan确定$none"
+				echo -e "$yellow modify userID = $cyan Sure $none"
 				echo "----------------------------------------------------------------"
 				echo
 				pause
@@ -1524,7 +1524,7 @@ change_v2ray_id() {
 				break
 			elif [[ $y_n == [Nn] ]]; then
 				echo
-				echo -e "$green 已取消修改用户ID...$none"
+				echo -e "$green User ID modification canceled...$none"
 				echo
 				break
 			else
@@ -1950,18 +1950,18 @@ custom_uuid() {
 	echo
 	while :; do
 		echo -e "请输入$yello自定义的 UUID$none...(${cyan}UUID 格式一定要对!!!$none)"
-		read -p "$(echo -e "(当前 UUID: ${cyan}${v2ray_id}$none)"): " myuuid
+		read -p "$(echo -e "(Current UUID: ${cyan}${v2ray_id}$none)"): " myuuid
 		[ -z "$myuuid" ] && error && continue
 		case $myuuid in
 		$v2ray_id)
 			echo
-			echo -e " 大佬...跟 当前 UUID 一毛一样啊...修改个鸡鸡哦 "
+			echo -e " Big guy...it's the same as the current UUID...modify a dick "
 			echo
 			error
 			;;
 		*[/$]* | *\&*)
 			echo
-			echo -e " 由于这个脚本太辣鸡了..所以 UUID 不能包含$red / $none或$red $ $none或$red & $none这三个符号.... "
+			echo -e " Since this script is too spicy.. so UUID cannot contain $red / $none或$red $ $none或$red & $none这三个符号.... "
 			echo
 			error
 			;;
@@ -1970,7 +1970,7 @@ custom_uuid() {
 			echo
 			echo -e "$yellow UUID = $cyan$myuuid$none"
 			echo
-			echo -e " 如果 UUID 格式不正确.. V2Ray 会跪...使用$cyan v2ray reuuid$none 复活"
+			echo -e " If the UUID is malformed.. V2Ray will kneel... use $cyan v2ray reuuid$none 复活"
 			echo "----------------------------------------------------------------"
 			echo
 			pause
@@ -2132,7 +2132,7 @@ download_v2ray_config() {
 get_v2ray_config() {
 	config
 	echo
-	echo " 如果你当前使用的 SSH 客户端不是 Xshell 的话...下载 V2Ray 客户端配置文件将会出现卡死情况"
+	echo " If the SSH client you are currently using is not Xshell... Downloading the V2Ray client configuration file will be stuck"
 	echo
 	while :; do
 		read -p "$(echo -e "不要BB...哥就是在使用 Xshell [${magenta}Y$none]:")" is_xshell
@@ -2141,7 +2141,7 @@ get_v2ray_config() {
 		else
 			if [[ $is_xshell == [yY] ]]; then
 				echo
-				echo "开始下载....请选择 V2Ray 客户端配置文件保存位置"
+				echo "Start download.... Please select the location to save the V2Ray client configuration file"
 				echo
 				# sz /etc/v2ray/233blog_v2ray.zip
 				local tmpfile="/tmp/233blog_v2ray_config_$RANDOM.json"
@@ -2149,7 +2149,7 @@ get_v2ray_config() {
 				sz $tmpfile
 				echo
 				echo
-				echo -e "$green 下载完成咯...$none"
+				echo -e "$green Download is complete...$none"
 				echo
 				# echo -e "$yellow 解压密码 = ${cyan}233blog.com$none"
 				# echo
