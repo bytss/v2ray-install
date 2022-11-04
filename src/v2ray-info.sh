@@ -159,7 +159,7 @@ _v2_info() {
 	echo
 	echo "V2Ray 客户端使用教程: https://233v2.com/post/4/"
 	echo
-	echo -e "提示: 输入 $cyan v2ray url $none 可生成 vmess URL 链接 / 输入 $cyan v2ray qr $none 可生成二维码链接"
+	echo -e "Hint: enter $cyan v2ray url $none can be generated vmess URL link / input $cyan v2ray qr $none Generate QR code link"
 	echo
 	echo -e "${yellow}免被墙..推荐使用JMS: ${cyan}https://getjms.com${none}"
 	echo
