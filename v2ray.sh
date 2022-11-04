@@ -2566,7 +2566,7 @@ do_service() {
 }
 _help() {
 	echo
-	echo "........... V2Ray 管理脚本帮助信息 by 233v2.com .........."
+	echo "........... V2Ray Admin Script Help Information by 233v2.com .........."
 	echo -e "
 	${green}v2ray menu $none管理 V2Ray (同等于直接输入 v2ray)
 
@@ -2607,7 +2607,7 @@ menu() {
 	clear
 	while :; do
 		echo
-		echo "........... V2Ray 管理脚本 $_version by 233v2.com .........."
+		echo "........... V2Ray Manage scripts $_version by 233v2.com .........."
 		echo
 		echo -e "## V2Ray 版本: $cyan$v2ray_ver$none  /  V2Ray 状态: $v2ray_status ##"
 		echo
@@ -2619,7 +2619,7 @@ menu() {
 		echo
 		echo "捐赠脚本作者: https://233v2.com/donate/"
 		echo
-		echo -e "$yellow  1. $none查看 V2Ray 配置"
+		echo -e "$yellow  1. $none View V2Ray configuration"
 		echo
 		echo -e "$yellow  2. $none修改 V2Ray 配置"
 		echo
