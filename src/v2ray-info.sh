@@ -136,7 +136,7 @@ _v2_info() {
 		echo
 		echo -e "$yellow 端口 (Port) = $cyan$v2ray_port$none"
 		echo
-		echo -e "$yellow 用户ID (User ID / UUID) = $cyan${v2ray_id}$none"
+		echo -e "$yellow UserID (User ID / UUID) = $cyan${v2ray_id}$none"
 		echo
 		echo -e "$yellow 额外ID (Alter Id) = ${cyan}${alterId}${none}"
 		echo

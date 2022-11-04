@@ -2568,11 +2568,11 @@ _help() {
 	echo
 	echo "........... V2Ray Admin Script Help Information by 233v2.com .........."
 	echo -e "
-	${green}v2ray menu $none管理 V2Ray (同等于直接输入 v2ray)
+	${green}v2ray menu $none manage V2Ray (Equivalent to direct input v2ray)
 
-	${green}v2ray info $none查看 V2Ray 配置信息
+	${green}v2ray info $none Check V2Ray configuration information
 
-	${green}v2ray config $none修改 V2Ray 配置
+	${green}v2ray config $none Revise V2Ray configure
 
 	${green}v2ray link $none生成 V2Ray 客户端配置文件链接
 

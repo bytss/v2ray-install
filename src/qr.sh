@@ -6,15 +6,15 @@ _qr_create() {
 	fi
 	local link="https://233boy.github.io/tools/qr.html#${vmess}"
 	echo
-	echo "---------- V2Ray 二维码 -------------"
+	echo "---------- V2Ray QR code -------------"
 	echo
 	qrencode -s 1 -m 1 -t ansi "${vmess}"
 	echo
-	echo "如果无法正常显示二维码，请使用下面的链接来生成二维码:"
+	echo "If the QR code cannot be displayed properly, please use the link below to generate the QR code:"
 	echo -e ${cyan}$link${none}
 	echo
 	echo
-	echo -e "$red 友情提醒: 请务必核对扫码结果 (V2RayNG 除外) $none"
+	echo -e "$red Friendly reminder: Please be sure to check the scan result (V2RayNG 除外) $none"
 	echo
 	echo
 	echo " V2Ray 客户端使用教程: https://233v2.com/post/4/"
@@ -30,7 +30,7 @@ _ss_qr() {
 	echo
 	qrencode -s 1 -m 1 -t ansi "${ss_link}"
 	echo
-	echo "如果无法正常显示二维码，请使用下面的链接来生成二维码:"
+	echo "If the QR code cannot be displayed properly, please use the link below to generate the QR code:"
 	echo -e ${cyan}$link${none}
 	echo
 	echo -e " 温馨提示...$red Shadowsocks Win 4.0.6 $none客户端可能无法识别该二维码"
