@@ -54,20 +54,20 @@ fi
 
 backup="/etc/v2ray/233blog_v2ray_backup.conf"
 
-if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/233boy/v2ray ]]; then
+if [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f $backup && -d /etc/v2ray/bytss/v2ray ]]; then
 
 	. $backup
 
-elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
+elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/bytss/v2ray ]]; then
 
-	. /etc/v2ray/233boy/v2ray/tools/v1xx_to_v3xx.sh
+	. /etc/v2ray/bytss/v2ray/tools/v1xx_to_v3xx.sh
 
 else
 	echo -e " 哎呀哎呀…… ${red}出错咯...请重新安装V2Ray${none} ${yellow}~(^_^) ${none}" && exit 1
 fi
 
 if [[ $mark != "v3" ]]; then
-	. /etc/v2ray/233boy/v2ray/tools/v3.sh
+	. /etc/v2ray/bytss/v2ray/tools/v3.sh
 fi
 if [[ $v2ray_transport -ge 18 && $v2ray_transport -ne 33 ]]; then
 	dynamicPort=true
@@ -93,7 +93,7 @@ else
 	v2ray_ver_v5=1
 fi
 
-. /etc/v2ray/233boy/v2ray/src/init.sh
+. /etc/v2ray/bytss/v2ray/src/init.sh
 systemd=true
 # _test=true
 
@@ -2384,9 +2384,9 @@ update_v2ray() {
 }
 update_v2ray.sh() {
 	if [[ $_test ]]; then
-		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/v2ray/test/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
+		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/bytss/v2ray/test/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
 	else
-		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/233boy/v2ray/master/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
+		local latest_version=$(curl -H 'Cache-Control: no-cache' -s -L "https://raw.githubusercontent.com/bytss/v2ray/master/v2ray.sh" | grep '_version' -m1 | cut -d\" -f2)
 	fi
 
 	if [[ ! $latest_version ]]; then
@@ -2408,9 +2408,9 @@ update_v2ray.sh() {
 		echo
 		echo -e " $green 咦...发现新版本耶....正在拼命更新.......$none"
 		echo
-		cd /etc/v2ray/233boy/v2ray
+		cd /etc/v2ray/bytss/v2ray
 		git pull
-		cp -f /etc/v2ray/233boy/v2ray/v2ray.sh $_v2ray_sh
+		cp -f /etc/v2ray/bytss/v2ray/v2ray.sh $_v2ray_sh
 		chmod +x $_v2ray_sh
 		echo
 		echo -e "$green 更新成功啦...当前 V2Ray 管理脚本 版本: ${cyan}$latest_version$none"
