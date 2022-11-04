@@ -1012,15 +1012,15 @@ esac
 clear
 while :; do
 	echo
-	echo "........... V2Ray 一键安装脚本 & 管理脚本 by 233v2.com .........."
+	echo "........... V2Ray one-click installation script & management script by 233v2.com .........."
 	echo
-	echo "帮助说明: https://233v2.com/post/1/"
+	echo "Help description: https://233v2.com/post/1/"
 	echo
-	echo "搭建教程: https://233v2.com/post/2/"
+	echo "Build Tutorial: https://233v2.com/post/2/"
 	echo
-	echo " 1. 安装"
+	echo " 1. Install"
 	echo
-	echo " 2. 卸载"
+	echo " 2. Uninstall"
 	echo
 	if [[ $local_install ]]; then
 		echo -e "$yellow 温馨提示.. 本地安装已启用 ..$none"

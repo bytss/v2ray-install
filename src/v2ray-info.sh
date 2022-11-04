@@ -73,7 +73,7 @@ _v2_args() {
 _v2_info() {
 	echo
 	echo
-	echo "---------- V2Ray 配置信息 -------------"
+	echo "---------- V2Ray configuration information -------------"
 	if [[ $v2ray_transport == [45] ]]; then
 		if [[ ! $caddy ]]; then
 			echo
