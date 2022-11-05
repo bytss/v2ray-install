@@ -2666,36 +2666,40 @@ menu() {
 				break
 				;;
 			4)
-				get_shadowsocks_config
+				view_uuid_manager
 				break
 				;;
 			5)
-				change_shadowsocks_config
+				get_shadowsocks_config
 				break
 				;;
 			6)
+				change_shadowsocks_config
+				break
+				;;
+			7)
 				_load mtproto.sh
 				_mtproto_main
 				break
 				;;
-			7)
+			8)
 				_load socks.sh
 				_socks_main
 				break
 				;;
-			8)
+			9)
 				v2ray_service
 				break
 				;;
-			9)
+			10)
 				update
 				break
 				;;
-			10)
+			11)
 				uninstall_v2ray
 				break
 				;;
-			11)
+			12)
 				other
 				break
 				;;
@@ -2714,6 +2718,9 @@ menu)
 	;;
 i | info)
 	view_v2ray_config_info
+	;;
+u | uuid)
+	view_uuid_manager
 	;;
 c | config)
 	change_v2ray_config
