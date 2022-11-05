@@ -2612,43 +2612,41 @@ menu() {
 	clear
 	while :; do
 		echo
-		echo "........... V2Ray Manage scripts $_version by 233v2.com .........."
+		echo "........... V2Ray Manage scripts $_version .........."
 		echo
-		echo -e "## V2Ray 版本: $cyan$v2ray_ver$none  /  V2Ray 状态: $v2ray_status ##"
+		echo -e "## V2Ray Version: $cyan$v2ray_ver$none  /  V2Ray state: $v2ray_status ##"
 		echo
-		echo "帮助说明: https://233v2.com/post/1/"
+		echo "This installer is owned by 233boy"
 		echo
-		echo "反馈问题: https://github.com/233boy/v2ray/issues"
+		echo "Translated into English by Matss"
 		echo
-		echo "TG 频道: https://t.me/tg2333"
+		echo -e "$yellow 1. $none View V2Ray configuration"
 		echo
-		echo "捐赠脚本作者: https://233v2.com/donate/"
+		echo -e "$yellow 2. $none Modify V2Ray configuration"
 		echo
-		echo -e "$yellow  1. $none View V2Ray configuration"
+		echo -e "$yellow 3. $none UUID Manager"
 		echo
-		echo -e "$yellow  2. $none修改 V2Ray 配置"
+		echo -e "$yellow 4. $none Download V2Ray Configuration / Generate Configuration Information Link / Generate QR Code Link"
 		echo
-		echo -e "$yellow  3. $none下载 V2Ray 配置 / 生成配置信息链接 / 生成二维码链接"
+		echo -e "$yellow 5. $none View Shadowsocks Configuration / Generate QR Code Link"
 		echo
-		echo -e "$yellow  4. $none查看 Shadowsocks 配置 / 生成二维码链接"
+		echo -e "$yellow 6. $none Modify Shadowsocks configuration"
 		echo
-		echo -e "$yellow  5. $none修改 Shadowsocks 配置"
+		echo -e "$yellow 7. $none View MTProto Configuration / Modify MTProto Configuration"
 		echo
-		echo -e "$yellow  6. $none查看 MTProto 配置 / 修改 MTProto 配置"
+		echo -e "$yellow 8. $none View Socks5 Configuration / Modify Socks5 Configuration"
 		echo
-		echo -e "$yellow  7. $none查看 Socks5 配置 / 修改 Socks5 配置"
+		echo -e "$yellow 9. $none start/stop/restart/view log"
 		echo
-		echo -e "$yellow  8. $none启动 / 停止 / 重启 / 查看日志"
+		echo -e "$yellow 10. $none Update V2Ray / Update V2Ray Management Script"
 		echo
-		echo -e "$yellow  9. $none更新 V2Ray / 更新 V2Ray 管理脚本"
+		echo -e "$yellow 11. $none Uninstall V2Ray"
 		echo
-		echo -e "$yellow 10. $none卸载 V2Ray"
+		echo -e "$yellow 12. $none Others"
 		echo
-		echo -e "$yellow 11. $none其他"
+		echo -e "Bonus tip...if you don't want to execute the option...press $yellow Ctrl + C $none to exit"
 		echo
-		echo -e "温馨提示...如果你不想执行选项...按$yellow Ctrl + C $none即可退出"
-		echo
-		read -p "$(echo -e "请选择菜单 [${magenta}1-11$none]:")" choose
+		read -p "$(echo -e "Please select a menu [${magenta}1-11$none]:")" choose
 		if [[ -z $choose ]]; then
 			exit 1
 		else
