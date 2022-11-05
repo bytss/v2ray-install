@@ -2624,9 +2624,9 @@ menu() {
 		echo
 		echo -e "$yellow 2. $none Modify V2Ray configuration"
 		echo
-		echo -e "$yellow 3. $none UUID Manager"
+		echo -e "$yellow 3. $none Download V2Ray Configuration / Generate Configuration Information Link / Generate QR Code Link"
 		echo
-		echo -e "$yellow 4. $none Download V2Ray Configuration / Generate Configuration Information Link / Generate QR Code Link"
+		echo -e "$yellow 4. $none UUID Manager"
 		echo
 		echo -e "$yellow 5. $none View Shadowsocks Configuration / Generate QR Code Link"
 		echo
