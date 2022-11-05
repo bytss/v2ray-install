@@ -207,6 +207,9 @@ view_uuid_manager() {
 	_load v2ray-uuid.sh
 	_uuid_manager
 }
+add_uuid(){
+	
+}
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
 
@@ -658,15 +661,15 @@ disable_shadowsocks() {
 }
 change_v2ray_config() {
 	local _menu=(
-		"修改 V2Ray 端口"
-		"修改 V2Ray 传输协议"
-		"修改 V2Ray 动态端口 (如果可以)"
-		"修改 用户ID ( UUID )"
-		"修改 TLS 域名 (如果可以)"
-		"修改 分流的路径 (如果可以)"
-		"修改 伪装的网址 (如果可以)"
-		"关闭 网站伪装 和 路径分流 (如果可以)"
-		"开启 / 关闭 广告拦截"
+		"Modify V2Ray port"
+		"Modify the V2Ray transport protocol"
+		"Modify V2Ray dynamic ports (if possible)"
+		"Modify User ID ( UUID )"
+		"Modify the TLS domain name (if possible)"
+		"Modify the diversion path (if possible)"
+		"Modify the fake URL (if possible)"
+		"Turn off site masquerading and routing (if possible)"
+		"Turn on/off ad blocking"
 	)
 	while :; do
 		for ((i = 1; i <= ${#_menu[*]}; i++)); do
@@ -679,7 +682,7 @@ change_v2ray_config() {
 			fi
 		done
 		echo
-		read -p "$(echo -e "请选择 [${magenta}1-${#_menu[*]}$none]:")" _opt
+		read -p "$(echo -e "please choose [${magenta}1-${#_menu[*]}$none]:")" _opt
 		if [[ -z $_opt ]]; then
 			error
 		else
@@ -1505,7 +1508,7 @@ change_v2ray_dynamic_port_end() {
 change_v2ray_id() {
 	echo
 	while :; do
-		echo -e "是否确定要修改用户ID [${magenta}Y/N$none]"
+		echo -e "Are you sure you want to modify the User ID [${magenta}Y/N$none]"
 		read -p "$(echo -e "默认 [${cyan}N$none]:")" y_n
 		if [[ -z $y_n ]]; then
 			echo
@@ -1516,7 +1519,7 @@ change_v2ray_id() {
 			if [[ $y_n == [Yy] ]]; then
 				echo
 				echo
-				echo -e "$yellow modify userID = $cyan Sure $none"
+				echo -e "$yellow Modify User ID = $cyan Sure $none"
 				echo "----------------------------------------------------------------"
 				echo
 				pause
@@ -1599,9 +1602,9 @@ change_domain() {
 		done
 	else
 		echo
-		echo -e "$red 抱歉...不支持修改...$none"
+		echo -e "$red sorry...modification not supported...$none"
 		echo
-		echo -e " 备注..修改 TLS 域名仅支持传输协议为 ${yellow}WebSocket + TLS$none 或 ${yellow}HTTP/2$none 并且$yellow 自动配置 TLS = 打开$none"
+		echo -e " Remarks.. Modifying the TLS domain name only supports the transport protocol as ${yellow}WebSocket + TLS$none or ${yellow}HTTP/2$none and$yellow Autoconfig TLS = On$none"
 		echo
 		echo -e " 当前传输协议为: ${cyan}${transport[$v2ray_transport - 1]}${none}"
 		echo
@@ -2039,7 +2042,7 @@ v2ray_service() {
 start_v2ray() {
 	if [[ $v2ray_pid ]]; then
 		echo
-		echo -e "${green} V2Ray 正在运行...无需再启动$none"
+		echo -e "${green} V2Ray running... no need to start again$none"
 		echo
 	else
 
@@ -2047,11 +2050,11 @@ start_v2ray() {
 		service v2ray start >/dev/null 2>&1
 		if [[ $? -ne 0 ]]; then
 			echo
-			echo -e "${red} V2Ray 启动失败！$none"
+			echo -e "${red} V2Ray failed to activate！$none"
 			echo
 		else
 			echo
-			echo -e "${green} V2Ray 已启动$none"
+			echo -e "${green} V2Ray activated$none"
 			echo
 		fi
 
@@ -2062,11 +2065,11 @@ stop_v2ray() {
 		# systemctl stop v2ray
 		service v2ray stop >/dev/null 2>&1
 		echo
-		echo -e "${green} V2Ray 已停止$none"
+		echo -e "${green} V2Ray stopped$none"
 		echo
 	else
 		echo
-		echo -e "${red} V2Ray 没有在运行$none"
+		echo -e "${red} V2Ray not running$none"
 		echo
 	fi
 }
@@ -2075,11 +2078,11 @@ restart_v2ray() {
 	service v2ray restart >/dev/null 2>&1
 	if [[ $? -ne 0 ]]; then
 		echo
-		echo -e "${red} V2Ray 重启失败！$none"
+		echo -e "${red} V2Ray restart failed！$none"
 		echo
 	else
 		echo
-		echo -e "${green} V2Ray 重启完成 $none"
+		echo -e "${green} V2Ray restart complete $none"
 		echo
 	fi
 }
@@ -2098,15 +2101,15 @@ view_v2ray_error_log() {
 download_v2ray_config() {
 	while :; do
 		echo
-		echo -e "$yellow 1. $none直接下载 V2Ray 客户端配置文件(仅支持 Xshell)"
+		echo -e "$yellow 1. $none Download V2Ray Client Profile (only supported Xshell)"
 		echo
-		echo -e "$yellow 2. $none生成 V2Ray 客户端配置文件下载链接"
+		echo -e "$yellow 2. $none Generate V2Ray Client configuration file download link"
 		echo
-		echo -e "$yellow 3. $none生成 V2Ray 配置信息链接"
+		echo -e "$yellow 3. $none Generate  V2Ray Configuration information link"
 		echo
-		echo -e "$yellow 4. $none生成 V2Ray 配置二维码链接"
+		echo -e "$yellow 4. $none Generate  V2Ray Configure QR code link"
 		echo
-		read -p "$(echo -e "请选择 [${magenta}1-4$none]:")" other_opt
+		read -p "$(echo -e "please choose [${magenta}1-4$none]:")" other_opt
 		if [[ -z $other_opt ]]; then
 			error
 		else
@@ -2358,11 +2361,11 @@ install_bbr() {
 update() {
 	while :; do
 		echo
-		echo -e "$yellow 1. $none更新 V2Ray 主程序"
+		echo -e "$yellow 1. $noneUpdate the V2Ray main program"
 		echo
-		echo -e "$yellow 2. $none更新 V2Ray 管理脚本"
+		echo -e "$yellow 2. $none Update V2Ray management scripts"
 		echo
-		read -p "$(echo -e "请选择 [${magenta}1-2$none]:")" _opt
+		read -p "$(echo -e "please choose [${magenta}1-2$none]:")" _opt
 		if [[ -z $_opt ]]; then
 			error
 		else
@@ -2764,9 +2767,9 @@ bt)
 status)
 	echo
 	if [[ $v2ray_transport == [45] || $v2ray_transport == 33 ]] && [[ $caddy ]]; then
-		echo -e " V2Ray 状态: $v2ray_status  /  Caddy 状态: $caddy_run_status"
+		echo -e " V2Ray status: $v2ray_status  /  Caddy status: $caddy_run_status"
 	else
-		echo -e " V2Ray 状态: $v2ray_status"
+		echo -e " V2Ray status: $v2ray_status"
 	fi
 	echo
 	;;
