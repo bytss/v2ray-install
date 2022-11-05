@@ -207,9 +207,7 @@ view_uuid_manager() {
 	_load v2ray-uuid.sh
 	_uuid_manager
 }
-add_uuid(){
-	
-}
+
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
 
