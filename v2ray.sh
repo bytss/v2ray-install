@@ -216,7 +216,7 @@ add_uuid_client() {
 	 esac
 	done
 
-	sed -i '12 a \                                        {\n                                                "id": "'${$uuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
+	sed -i '12 a \                                        {\n                                                "id": "'${uuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
 	echo "Added!"
 	restart_v2ray
 }
