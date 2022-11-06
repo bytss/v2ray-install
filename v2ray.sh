@@ -208,9 +208,7 @@ view_uuid_manager() {
 	_uuid_manager
 }
 add_uuid_client() {
-	
-	UUID="23e41c88-8edf-4aed-87ee-e991cb65d4e4"
-	sed -i '12 a \                                        {\n                                                "id": "'$UUID'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
+	sed -i '12 a \                                        {\n                                                "id": "'$uuid='",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
 	echo "Added!"
 	restart_v2ray
 }
