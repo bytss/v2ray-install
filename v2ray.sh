@@ -207,7 +207,12 @@ view_uuid_manager() {
 	_load v2ray-uuid.sh
 	_uuid_manager
 }
-
+add_uuid_client() {
+	
+	UUID="23e41c88-8edf-4aed-87ee-e991cb65d4e4"
+	sed -i '12 a \                                        {\n                                                "id": "'$UUID'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' v2ray_server_config
+	restart_v2ray
+}
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
 
@@ -2720,6 +2725,9 @@ i | info)
 	;;
 u | uuid)
 	view_uuid_manager
+	;;
+add | a)
+	add_uuid_client
 	;;
 c | config)
 	change_v2ray_config
