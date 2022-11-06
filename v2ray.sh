@@ -207,11 +207,12 @@ view_uuid_manager() {
 	_load v2ray-uuid.sh
 	_uuid_manager
 }
-adduuid() {
-	while getopts u: flag
+v2ray_client_add() {
+	while getopts :u: flag
 	do
 		case ${flag} in
-			u) guuid=${OPTARG};;
+			u) guuid=$OPTARG;;
+			?) echo "I dont know what is $OPTARG is"
 		esac
 	done
 
@@ -2733,7 +2734,7 @@ u | uuid)
 	view_uuid_manager
 	;;
 add | a)
-	add_uuid_client
+	v2ray_client_add
 	;;
 c | config)
 	change_v2ray_config
