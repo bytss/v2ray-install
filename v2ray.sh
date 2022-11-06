@@ -207,8 +207,7 @@ view_uuid_manager() {
 	_load v2ray-uuid.sh
 	_uuid_manager
 }
-add_uuid_client() {
-
+adduuid() {
 	while getopts u: flag
 	do
 		case ${flag} in
