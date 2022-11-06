@@ -209,7 +209,8 @@ view_uuid_manager() {
 }
 add_uuid_client() {
 
-	while getopts u: flag do
+	while getopts u: flag
+	do
 		case ${flag} in
 			u) guuid=${OPTARG};;
 		esac
