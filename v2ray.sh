@@ -208,17 +208,9 @@ view_uuid_manager() {
 	_uuid_manager
 }
 v2ray_client_add() {
-	while getopts :u: flag
-	do
-		case ${flag} in
-			u) guuid=$OPTARG;;
-			?) echo "I dont know what is $OPTARG is"
-		esac
-	done
 
-	sed -i '12 a \                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
-	echo "Added!"
-	restart_v2ray
+	_load v2ray_uuid_add.sh
+	_add_uuid
 }
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
@@ -2733,7 +2725,7 @@ i | info)
 u | uuid)
 	view_uuid_manager
 	;;
-add | a)
+clientadd | a)
 	v2ray_client_add
 	;;
 c | config)
