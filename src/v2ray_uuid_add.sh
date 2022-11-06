@@ -1,5 +1,5 @@
 _add_uuid(){
-    cat > /user/bin/clientadd
+    cat > /usr/bin/clientadd
     #!bin/bash
     while getopts :u: flag
 	do
@@ -13,5 +13,5 @@ _add_uuid(){
 	echo "Added!"
 	systemctl restart v2ray
 
-    chmode +x /user/bin/clientadd
+    chmode +x /usr/bin/clientadd
 }
