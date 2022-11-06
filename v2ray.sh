@@ -209,11 +209,10 @@ view_uuid_manager() {
 }
 add_uuid_client() {
 
-	while getopts u: flag
-	do
-	 case "$flag" in
-	 	u) guuid=${OPTARG};;
-	 esac
+	while getopts u: flag do
+		case ${flag} in
+			u) guuid=${OPTARG};;
+		esac
 	done
 
 	sed -i '12 a \                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
