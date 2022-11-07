@@ -128,7 +128,7 @@ fi
 if [[ ! -f $_v2ray_sh ]]; then
 	mv -f /usr/local/bin/v2ray $_v2ray_sh
 	chmod +x $_v2ray_sh
-	echo -e "\n $yellow 警告: 请重新登录 SSH 以避免出现 v2ray 命令未找到的情况。$none  \n" && exit 1
+	echo -e "\n $yellow Warning: Please log back into SSH to avoid v2ray command not found。$none  \n" && exit 1
 fi
 
 if [ $v2ray_pid ]; then
@@ -208,9 +208,21 @@ view_uuid_manager() {
 	_uuid_manager
 }
 v2ray_client_add() {
+cat > /usr/bin/clientadd
+#!/bin/bash
+while getopts :u: flag
+    do
+	case ${flag} in
+		u) guuid=$OPTARG;;
+		?) echo "I dont know what is $OPTARG is"
+	esac
+done
 
-	_load v2ray_uuid_add.sh
-	_add_uuid
+sed -i '12 a \                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
+echo "Added!"
+systemctl restart v2ray
+
+chmod +x /usr/bin/clientadd
 }
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
@@ -2725,7 +2737,7 @@ i | info)
 u | uuid)
 	view_uuid_manager
 	;;
-clientadd | a)
+a| clientadd)
 	v2ray_client_add
 	;;
 c | config)
