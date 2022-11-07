@@ -103,6 +103,7 @@ if [[ ! $(grep 'run -config' /lib/systemd/system/v2ray.service)  && $v2ray_ver_v
 	_install_v2ray_service
 	systemctl daemon-reload
 	systemctl restart v2ray
+	v2ray_client_add
 fi
 
 # fix caddy2 config
@@ -208,7 +209,6 @@ view_uuid_manager() {
 	_uuid_manager
 }
 v2ray_client_add() {
-chmod +x /usr/bin/clientadd
 cat > /usr/bin/clientadd
 #!/bin/bash
 while getopts :u: flag
