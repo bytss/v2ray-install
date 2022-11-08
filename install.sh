@@ -149,41 +149,6 @@ _sys_time() {
 	echo -e "${none}"
 	[[ $IS_OPENV ]] && pause
 }
-v2ray_client_add() {
-cat > /usr/bin/clientadd
-#!/bin/bash
-while getopts :u: flag
-    do
-	case ${flag} in
-		u) guuid=$OPTARG;;
-		?) echo "I dont know what is $OPTARG is"
-	esac
-done
-
-sed -i '12a\                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' /etc/v2ray/config.json
-echo "Added UUID: $guuid"
-systemctl restart v2ray
-
-chmod +x /usr/bin/clientadd
-}
-v2ray_client_delete(){
-cat > /usr/bin/clientdelete
-#!/bin/bash
-while getopts :u: flag
-    do
-	case ${flag} in
-		u) dguuid=$OPTARG;;
-		?) echo "I dont know what is $OPTARG is"
-	esac
-done
-
-awk '/'${dguuid}'/{for(x=NR-1;x<=NR+3;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)if(!(i in d))print a[i]}' /etc/v2ray/config.json > /etc/v2ray/tmp_mts.json && mv /etc/v2ray/tmp_mts.json /etc/v2ray/config.json
-
-echo "Deleted UUID: $dguuid"
-systemctl restart v2ray
-
-chmod +x /usr/bin/clientdelete
-}
 v2ray_config() {
 	# clear
 	echo
@@ -709,19 +674,19 @@ shadowsocks_ciphers_config() {
 install_info() {
 	clear
 	echo
-	echo " ....I'm ready to install it.. See if there are hairs and the configuration is correct..."
+	echo " ....准备安装了咯..看看有毛有配置正确了..."
 	echo
-	echo "---------- Installation Information -------------"
+	echo "---------- 安装信息 -------------"
 	echo
-	echo -e "$yellow V2Ray Transfer Protocol = $cyan${transport[$v2ray_transport - 1]}$none"
+	echo -e "$yellow V2Ray 传输协议 = $cyan${transport[$v2ray_transport - 1]}$none"
 
 	if [[ $v2ray_transport == [45] || $v2ray_transport == 33 ]]; then
 		echo
 		echo -e "$yellow V2Ray 端口 = $cyan$v2ray_port$none"
 		echo
-		echo -e "$yellow your domain name = $cyan$domain$none"
+		echo -e "$yellow 你的域名 = $cyan$domain$none"
 		echo
-		echo -e "$yellow DNS = ${cyan}我确定已经有解析了$none"
+		echo -e "$yellow 域名解析 = ${cyan}我确定已经有解析了$none"
 		echo
 		echo -e "$yellow 自动配置 TLS = $cyan$install_caddy_info$none"
 
@@ -949,6 +914,7 @@ show_config_info() {
 	_v2_args
 	_v2_info
 	_load ss-info.sh
+
 }
 
 install() {
@@ -961,7 +927,7 @@ install() {
 		exit 1
 	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
 		echo
-		echo " If you need to continue the installation.. please uninstall the old version first"
+		echo "  如果你需要继续安装.. 请先卸载旧版本"
 		echo
 		echo -e " $yellow输入 ${cyan}v2ray uninstall${none} $yellow即可卸载${none}"
 		echo
@@ -971,8 +937,6 @@ install() {
 	blocked_hosts
 	shadowsocks_config
 	install_info
-	v2ray_client_add
-	v2ray_client_delete
 	# [[ $caddy ]] && domain_check
 	install_v2ray
 	if [[ $caddy || $v2ray_port == "80" ]]; then
@@ -989,6 +953,7 @@ install() {
 	## bbr
 	# _load bbr.sh
 	# _try_enable_bbr
+
 	get_ip
 	config
 	show_config_info
