@@ -2760,7 +2760,7 @@ u | uuid)
 clientadd)
 	v2ray_client_add
 	;;
-clientadelete)
+clientdelete)
 	v2ray_client_delete
 	;;
 c | config)
