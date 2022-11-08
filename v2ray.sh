@@ -208,7 +208,7 @@ view_uuid_manager() {
 	_uuid_manager
 }
 v2ray_client_add() {
-cat > /usr/bin/clientadd
+cat <<'V2RayClientAdd' > /usr/bin/clientadd
 #!/bin/bash
 while getopts :u: flag
     do
@@ -221,6 +221,7 @@ done
 sed -i '12a\                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' /etc/v2ray/config.json
 echo "Added UUID: $guuid"
 systemctl restart v2ray
+V2RayClientAdd
 
 chmod +x /usr/bin/clientadd
 }
