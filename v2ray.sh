@@ -219,12 +219,32 @@ while getopts :u: flag
 	esac
 done
 
-sed -i '12 a \                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' $v2ray_server_config
+sed -i '12a\                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' /etc/v2ray/config.json
 echo "Added!"
-restart_v2ray
+systemctl restart v2ray
 
 chmod +x /usr/bin/clientadd
 }
+
+v2ray_client_delete(){
+cat > /usr/bin/clientdelete
+#!/bin/bash
+while getopts :u: flag
+    do
+	case ${flag} in
+		u) dguuid=$OPTARG;;
+		?) echo "I dont know what is $OPTARG is"
+	esac
+done
+
+awk '/${guuid}/{for(x=NR-2;x<=NR+2;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)if(!(i in d))print a[i]}' /etc/v2ray/config.json > /etc/v2ray/tmp_mts.json && mv /etc/v2ray/tmp_mts.json /etc/v2ray/config.json
+
+echo "Deleted!"
+systemctl restart v2ray
+
+chmod +x /usr/bin/clientdelete
+}
+
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
 
