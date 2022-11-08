@@ -226,7 +226,7 @@ V2RayClientAdd
 chmod +x /usr/bin/clientadd
 }
 v2ray_client_delete(){
-cat > /usr/bin/clientdelete
+cat <<'V2RayClientDelete' > /usr/bin/clientdelete
 #!/bin/bash
 while getopts :u: flag
     do
@@ -240,6 +240,7 @@ awk '/'${dguuid}'/{for(x=NR-1;x<=NR+3;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)
 
 echo "Deleted UUID: $dguuid"
 systemctl restart v2ray
+V2RayClientDelete
 
 chmod +x /usr/bin/clientdelete
 }
