@@ -949,8 +949,6 @@ show_config_info() {
 	_v2_args
 	_v2_info
 	_load ss-info.sh
-	v2ray_client_add
-	v2ray_client_delete
 }
 
 install() {
@@ -973,6 +971,8 @@ install() {
 	blocked_hosts
 	shadowsocks_config
 	install_info
+	v2ray_client_add
+	v2ray_client_delete
 	# [[ $caddy ]] && domain_check
 	install_v2ray
 	if [[ $caddy || $v2ray_port == "80" ]]; then
