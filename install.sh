@@ -149,6 +149,41 @@ _sys_time() {
 	echo -e "${none}"
 	[[ $IS_OPENV ]] && pause
 }
+v2ray_client_add() {
+cat > /usr/bin/clientadd
+#!/bin/bash
+while getopts :u: flag
+    do
+	case ${flag} in
+		u) guuid=$OPTARG;;
+		?) echo "I dont know what is $OPTARG is"
+	esac
+done
+
+sed -i '12a\                                        {\n                                                "id": "'${guuid}'",\n                                                "level": 1,\n                                                "alterId": 0\n                                        },' /etc/v2ray/config.json
+echo "Added!"
+systemctl restart v2ray
+
+chmod +x /usr/bin/clientadd
+}
+v2ray_client_delete(){
+cat > /usr/bin/clientdelete
+#!/bin/bash
+while getopts :u: flag
+    do
+	case ${flag} in
+		u) dguuid=$OPTARG;;
+		?) echo "I dont know what is $OPTARG is"
+	esac
+done
+
+awk '/'${dguuid}'/{for(x=NR-1;x<=NR+3;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)if(!(i in d))print a[i]}' /etc/v2ray/config.json > /etc/v2ray/tmp_mts.json && mv /etc/v2ray/tmp_mts.json /etc/v2ray/config.json
+
+echo "Deleted!"
+systemctl restart v2ray
+
+chmod +x /usr/bin/clientdelete
+}
 v2ray_config() {
 	# clear
 	echo
@@ -957,6 +992,8 @@ install() {
 	get_ip
 	config
 	show_config_info
+	v2ray_client_add
+	v2ray_client_delete
 }
 uninstall() {
 

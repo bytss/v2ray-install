@@ -226,7 +226,6 @@ systemctl restart v2ray
 
 chmod +x /usr/bin/clientadd
 }
-
 v2ray_client_delete(){
 cat > /usr/bin/clientdelete
 #!/bin/bash
