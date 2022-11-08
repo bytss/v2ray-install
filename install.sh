@@ -709,19 +709,19 @@ shadowsocks_ciphers_config() {
 install_info() {
 	clear
 	echo
-	echo " ....准备安装了咯..看看有毛有配置正确了..."
+	echo " ....I'm ready to install it.. See if there are hairs and the configuration is correct..."
 	echo
-	echo "---------- 安装信息 -------------"
+	echo "---------- Installation Information -------------"
 	echo
-	echo -e "$yellow V2Ray 传输协议 = $cyan${transport[$v2ray_transport - 1]}$none"
+	echo -e "$yellow V2Ray Transfer Protocol = $cyan${transport[$v2ray_transport - 1]}$none"
 
 	if [[ $v2ray_transport == [45] || $v2ray_transport == 33 ]]; then
 		echo
 		echo -e "$yellow V2Ray 端口 = $cyan$v2ray_port$none"
 		echo
-		echo -e "$yellow 你的域名 = $cyan$domain$none"
+		echo -e "$yellow your domain name = $cyan$domain$none"
 		echo
-		echo -e "$yellow 域名解析 = ${cyan}我确定已经有解析了$none"
+		echo -e "$yellow DNS = ${cyan}我确定已经有解析了$none"
 		echo
 		echo -e "$yellow 自动配置 TLS = $cyan$install_caddy_info$none"
 
@@ -856,6 +856,8 @@ install_v2ray() {
 	_download_v2ray_file
 	_install_v2ray_service
 	_mkdir_dir
+	v2ray_client_add
+	v2ray_client_delete
 }
 
 config() {
@@ -962,14 +964,12 @@ install() {
 		exit 1
 	elif [[ -f /usr/bin/v2ray/v2ray && -f /etc/v2ray/config.json ]] && [[ -f /etc/v2ray/233blog_v2ray_backup.txt && -d /etc/v2ray/233boy/v2ray ]]; then
 		echo
-		echo "  如果你需要继续安装.. 请先卸载旧版本"
+		echo " If you need to continue the installation.. please uninstall the old version first"
 		echo
 		echo -e " $yellow输入 ${cyan}v2ray uninstall${none} $yellow即可卸载${none}"
 		echo
 		exit 1
 	fi
-	v2ray_client_add
-	v2ray_client_delete
 	v2ray_config
 	blocked_hosts
 	shadowsocks_config
