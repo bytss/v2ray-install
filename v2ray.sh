@@ -238,7 +238,7 @@ while getopts :u: flag
 	esac
 done
 
-awk '/'${dguuid}'/{for(x=NR-2;x<=NR+2;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)if(!(i in d))print a[i]}' /etc/v2ray/config.json > /etc/v2ray/tmp_mts.json && mv /etc/v2ray/tmp_mts.json /etc/v2ray/config.json
+awk '/'${dguuid}'/{for(x=NR-1;x<=NR+3;x++)d[x];}{a[NR]=$0}END{for(i=1;i<=NR;i++)if(!(i in d))print a[i]}' /etc/v2ray/config.json > /etc/v2ray/tmp_mts.json && mv /etc/v2ray/tmp_mts.json /etc/v2ray/config.json
 
 echo "Deleted!"
 systemctl restart v2ray
