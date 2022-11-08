@@ -988,11 +988,11 @@ install() {
 	## bbr
 	# _load bbr.sh
 	# _try_enable_bbr
-	v2ray_client_add
-	v2ray_client_delete
 	get_ip
 	config
 	show_config_info
+	v2ray_client_add
+	v2ray_client_delete
 }
 uninstall() {
 
