@@ -103,8 +103,6 @@ if [[ ! $(grep 'run -config' /lib/systemd/system/v2ray.service)  && $v2ray_ver_v
 	_install_v2ray_service
 	systemctl daemon-reload
 	systemctl restart v2ray
-	v2ray_client_add
-	v2ray_client_delete
 fi
 
 # fix caddy2 config
