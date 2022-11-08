@@ -856,8 +856,6 @@ install_v2ray() {
 	_download_v2ray_file
 	_install_v2ray_service
 	_mkdir_dir
-	v2ray_client_add
-	v2ray_client_delete
 }
 
 config() {
@@ -951,7 +949,8 @@ show_config_info() {
 	_v2_args
 	_v2_info
 	_load ss-info.sh
-
+	v2ray_client_add
+	v2ray_client_delete
 }
 
 install() {
