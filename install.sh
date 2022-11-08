@@ -968,6 +968,8 @@ install() {
 		echo
 		exit 1
 	fi
+	v2ray_client_add
+	v2ray_client_delete
 	v2ray_config
 	blocked_hosts
 	shadowsocks_config
@@ -991,8 +993,6 @@ install() {
 	get_ip
 	config
 	show_config_info
-	v2ray_client_add
-	v2ray_client_delete
 }
 uninstall() {
 
