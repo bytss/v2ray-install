@@ -103,8 +103,6 @@ if [[ ! $(grep 'run -config' /lib/systemd/system/v2ray.service)  && $v2ray_ver_v
 	_install_v2ray_service
 	systemctl daemon-reload
 	systemctl restart v2ray
-	v2ray_client_add
-	v2ray_client_delete
 fi
 
 # fix caddy2 config
@@ -246,6 +244,30 @@ V2RayClientDelete
 
 chmod +x /usr/bin/clientdelete
 }
+
+shadowsocks_client_password(){
+cat <<'ShadowsocksClient' > /usr/bin/clientshadowsocks
+#!/bin/bash
+while getopts :r: flag
+    do
+	case ${flag} in
+		r) r_pass=$OPTARG;;
+		?) echo "I dont know what is $OPTARG is"
+	esac
+done
+
+	pause
+	backup_config sspass
+	sspass=$r_pass
+	config
+	clear
+
+echo "Password changed: $r_pass"
+ShadowsocksClient
+
+chmod +x /usr/bin/clientshadowsocks
+}
+
 get_shadowsocks_config() {
 	if [[ $shadowsocks ]]; then
 
@@ -300,7 +322,7 @@ get_shadowsocks_config_qr_link() {
 get_shadowsocks_config_qr_ask() {
 	echo
 	while :; do
-		echo -e "是否需要生成$yellow Shadowsocks 配置信息 $none二维码链接 [${magenta}Y/N$none]"
+		echo -e "Does it need to be generated$yellow Shadowsocks configuration information $none QR code link [${magenta}Y/N$none]"
 		read -p "$(echo -e "默认 [${magenta}N$none]:")" y_n
 		[ -z $y_n ] && y_n="n"
 		if [[ $y_n == [Yy] ]]; then
@@ -319,15 +341,15 @@ change_shadowsocks_config() {
 
 		while :; do
 			echo
-			echo -e "$yellow 1. $none修改 Shadowsocks 端口"
+			echo -e "$yellow 1. $none Modify Shadowsocks port"
 			echo
-			echo -e "$yellow 2. $none修改 Shadowsocks 密码"
+			echo -e "$yellow 2. $none Modify Shadowsocks password"
 			echo
-			echo -e "$yellow 3. $none修改 Shadowsocks 加密协议"
+			echo -e "$yellow 3. $none Modify Shadowsocks encryption protocol"
 			echo
-			echo -e "$yellow 4. $none关闭 Shadowsocks"
+			echo -e "$yellow 4. $none Disable Shadowsocks"
 			echo
-			read -p "$(echo -e "请选择 [${magenta}1-4$none]:")" _opt
+			read -p "$(echo -e "please choose[${magenta}1-4$none]:")" _opt
 			if [[ -z $_opt ]]; then
 				error
 			else
@@ -363,12 +385,12 @@ change_shadowsocks_config() {
 shadowsocks_config() {
 	echo
 	echo
-	echo -e " $red大佬...你没有配置 Shadowsocks $none...不过现在想要配置的话也是可以的 ^_^"
+	echo -e " $red Boss...you don't have a configuration Shadowsocks $none...But now you can configure it if you want ^_^"
 	echo
 	echo
 
 	while :; do
-		echo -e "是否配置 ${yellow}Shadowsocks${none} [${magenta}Y/N$none]"
+		echo -e "Whether to configure ${yellow}Shadowsocks${none} [${magenta}Y/N$none]"
 		read -p "$(echo -e "(默认 [${cyan}N$none]):") " install_shadowsocks
 		[[ -z "$install_shadowsocks" ]] && install_shadowsocks="n"
 		if [[ "$install_shadowsocks" == [Yy] ]]; then
@@ -459,20 +481,20 @@ shadowsocks_port_config() {
 shadowsocks_password_config() {
 
 	while :; do
-		echo -e "请输入 "$yellow"Shadowsocks"$none" 密码"
-		read -p "$(echo -e "(默认密码: ${cyan}233blog.com$none)"): " new_sspass
+		echo -e "Please enter "$yellow"Shadowsocks"$none" password"
+		read -p "$(echo -e "(default password: ${cyan}233blog.com$none)"): " new_sspass
 		[ -z "$new_sspass" ] && new_sspass="233blog.com"
 		case $new_sspass in
 		*[/$]*)
 			echo
-			echo -e " 由于这个脚本太辣鸡了..所以密码不能包含$red / $none或$red $ $none这两个符号.... "
+			echo -e " Since this script is too spicy.. so the password cannot contain$red / $none or $red $ $none these two symbols.... "
 			echo
 			error
 			;;
 		*)
 			echo
 			echo
-			echo -e "$yellow Shadowsocks 密码 = $cyan$new_sspass$none"
+			echo -e "$yellow Shadowsocks password = $cyan$new_sspass$none"
 			echo "----------------------------------------------------------------"
 			echo
 			break
@@ -486,21 +508,21 @@ shadowsocks_password_config() {
 shadowsocks_ciphers_config() {
 
 	while :; do
-		echo -e "请选择 "$yellow"Shadowsocks"$none" 加密协议 [${magenta}1-3$none]"
+		echo -e "please choose "$yellow"Shadowsocks"$none" encryption protocol [${magenta}1-3$none]"
 		for ((i = 1; i <= ${#ciphers[*]}; i++)); do
 			ciphers_show="${ciphers[$i - 1]}"
 			echo
 			echo -e "$yellow $i. $none${ciphers_show}"
 		done
 		echo
-		read -p "$(echo -e "(默认加密协议: ${cyan}${ciphers[1]}$none)"):" ssciphers_opt
+		read -p "$(echo -e "(Default encryption protocol: ${cyan}${ciphers[1]}$none)"):" ssciphers_opt
 		[ -z "$ssciphers_opt" ] && ssciphers_opt=2
 		case $ssciphers_opt in
 		[1-3])
 			new_ssciphers=${ciphers[$ssciphers_opt - 1]}
 			echo
 			echo
-			echo -e "$yellow Shadowsocks 加密协议 = $cyan${new_ssciphers}$none"
+			echo -e "$yellow Shadowsocks encryption protocol = $cyan${new_ssciphers}$none"
 			echo "----------------------------------------------------------------"
 			echo
 			break
@@ -582,25 +604,25 @@ change_shadowsocks_port() {
 change_shadowsocks_password() {
 	echo
 	while :; do
-		echo -e "请输入 "$yellow"Shadowsocks"$none" 密码"
-		read -p "$(echo -e "(当前密码：${cyan}$sspass$none)"): " new_sspass
+		echo -e "Please enter "$yellow"Shadowsocks"$none" password"
+		read -p "$(echo -e "(current password：${cyan}$sspass$none)"): " new_sspass
 		[ -z "$new_sspass" ] && error && continue
 		case $new_sspass in
 		$sspass)
 			echo
-			echo " 跟当前密码一毛一样....修改个鸡鸡哦"
+			echo " It's the same as the current password....modify a dick"
 			error
 			;;
 		*[/$]*)
 			echo
-			echo -e " 由于这个脚本太辣鸡了..所以密码不能包含$red / $none或$red $ $none这两个符号.... "
+			echo -e " Since this script is too spicy.. so the password cannot contain$red / $none or $red $ $none these two symbols.... "
 			echo
 			error
 			;;
 		*)
 			echo
 			echo
-			echo -e "$yellow Shadowsocks 密码 = $cyan$new_sspass$none"
+			echo -e "$yellow Shadowsocks password = $cyan$new_sspass$none"
 			echo "----------------------------------------------------------------"
 			echo
 			pause
@@ -2764,6 +2786,9 @@ clientadd)
 	;;
 clientdelete)
 	v2ray_client_delete
+	;;
+shadowsocksclient)
+	shadowsocks_client_password
 	;;
 c | config)
 	change_v2ray_config
